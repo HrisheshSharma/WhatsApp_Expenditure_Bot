@@ -26,6 +26,7 @@ This is the main application directory containing all the core files for our Fla
 - `quickstart.py`: A quickstart guide or tutorial-like code to help new users/developers understand how to start using or contributing to the project.
 
 - `requirements.txt`: Lists all the Python packages and libraries required for this project. They can be installed using `pip`.
+- `data.json`: stores all expenses.
 
 ## How It Works:
 
