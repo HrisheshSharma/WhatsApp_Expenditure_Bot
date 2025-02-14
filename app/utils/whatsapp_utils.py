@@ -10,8 +10,16 @@ import pathlib
 import textwrap
 from groq import Groq
 import re
+from dotenv import load_dotenv
 
-# OpenAI.api_key = "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"
+# Load environment variables
+load_dotenv()
+
+# Get API key from .env file
+api_key = os.getenv("GROQ_API_KEY")
+
+# Initialize Groq client
+client = Groq(api_key=api_key)
 
 def store_data(llm_string, file_path='data.json'):
     # Create data structure
@@ -34,9 +42,6 @@ def store_data(llm_string, file_path='data.json'):
 
 
 def classify_msg(message):
-    client = Groq(
-        api_key = "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"
-    )
     response = client.chat.completions.create(
         model = "llama-3.3-70b-versatile",
         messages = [{"role": "user", "content": f"Following is a message it can be of \n Type 1 : stating an expense like bought coffee for 400 \n Type 2 : query like how much i spent on ceratin things or in total (example : How much i spent on coffee in january) \n \n Classify the following message into Type 1 or Type 2 \n \n Note : Only return a single number if it is type 1 just return 1 else 2 (This is very important for my career) \n \n \n Message is : '{message}'"}]
@@ -45,9 +50,6 @@ def classify_msg(message):
     return response.choices[0].message.content.strip()
 
 def generate_response(message):
-    client = Groq(
-        api_key = "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"
-    )
     response = client.chat.completions.create(
         model = "llama-3.3-70b-versatile",
         messages = [{"role": "user", "content": message}]
